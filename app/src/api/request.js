@@ -16,8 +16,13 @@ const requests =axios.create({
 requests.interceptors.request.use( (config)=> {
   // 在发送请求之前做些什么
   //进度条开始
+  //游客登录给请求头添加一个字段
   if(store.state.detail.uuid_token){
     config.headers.userTempId=store.state.detail.uuid_token
+  }
+  //需要携带token给服务器
+  if(store.state.user.token){
+    config.headers.token=store.state.user.token
   }
   nprogress.start()
   return config;
