@@ -7,9 +7,26 @@ import Detail from "@/pages/Detail"
 import AddCartSuccess from '@/pages/AddCartSuccess'
 import ShopCart from '@/pages/ShopCart'
 import Trade from '@/pages/Trade'
+import Pay from "@/pages/Pay"
+import PaySuccess from "@/pages/PaySuccess"
+
 export default [{
   path: '/home',
   component: Home,
+  meta:{
+    show:true
+  }
+},
+{
+  path: '/paysuccess',
+  component: PaySuccess,
+  meta:{
+    show:true
+  }
+},
+{
+  path: '/pay',
+  component: Pay,
   meta:{
     show:true
   }

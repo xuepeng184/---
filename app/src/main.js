@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 按需引入element-ui
-import {Icon} from 'element-ui';
+import {Icon,MessageBox} from 'element-ui';
 Vue.use(Icon)
+Vue.prototype.$msgbox=MessageBox
+Vue.prototype.$alert= MessageBox.alert
 // import 'element-ui/lib/theme-chalk/index.css';
 // Vue.use(ElementUI);
 
@@ -27,8 +29,8 @@ import '@/mock/mockServe'
 //引入并使用jquery
 // import $ from 'jquery'
 // Vue.use($)
-
-//测试
+//同一引入api
+import * as API from "@/api"
 
 
 Vue.config.productionTip = false
@@ -37,6 +39,7 @@ new Vue({
   beforeCreate() {
     //配置全局时间总线
     Vue.prototype.$bus=this;
+    Vue.prototype.$API=API;
   },
   //注册路由
   router,

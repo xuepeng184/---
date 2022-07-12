@@ -1,6 +1,7 @@
 //在此对api进行统一管理
 import requests from './request.js'
 import mockRequests from './mockAjax.js'
+import { method } from 'lodash'
 //这是三级联动接口
 export const reqCategoryList = () => {
   //发请求
@@ -120,6 +121,31 @@ export const reqAddressInfo=()=>{
 export const reqOrderInfo=()=>{
   return requests({
     url:'/order/auth/trade',
+    method:'get'
+  })
+}
+
+//提交订单的接口
+export const reqSubmitOrder =(tradeNo,data)=>{
+  return requests({
+    url:`/order/auth/submitOrder?tradeNo=${tradeNo}`,
+    method:'post',
+    data
+  })
+}
+
+//获取支付信息
+export const reqPayInfo=(orderId)=>{
+  return requests({
+    url:`/payment/weixin/createNative/${orderId}`,
+    method:'get'
+  })
+}
+
+//获取支付状态
+export const reqPayStatus =(orderId)=>{
+  return requests({
+    url:`/payment/weixin/queryPayStatus/${orderId}`,
     method:'get'
   })
 }
