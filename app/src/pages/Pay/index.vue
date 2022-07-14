@@ -95,7 +95,7 @@
 <script>
 import QRCode from "qrcode";
 export default {
-  name: "Pay",
+  name: "pay",
   data() {
     return {
       payInfo: {},
@@ -131,13 +131,13 @@ export default {
         // type区别取消确定按钮
         beforeClose: (type, instance, done) => {
           if (type == "cancel") {
-            clearInterval(this, timer);
+            clearInterval(this.timer);
             this.timer = null;
             done();
             alert("请联系管理员");
           } else {
-            if (this.code == 200) {
-              clearInterval(this, timer);
+            if (this.code == 205) {
+              clearInterval(this.timer);
               this.timer = null;
               done();
               this.$router.push("/paysuccess");
@@ -150,7 +150,7 @@ export default {
         this.timer = setInterval(async () => {
           let result = await this.$API.reqPayStatus(this.orderId);
           console.log(result);
-          if (result.code == 200) {
+          if (result.code == 205) {
             clearInterval(this.timer);
             this.timer = null;
             this.code = result.code;

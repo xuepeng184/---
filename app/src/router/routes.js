@@ -1,54 +1,81 @@
-//引入路由
-import Home from '@/pages/Home'
-import Search from '@/pages/Search'
-import Register from '@/pages/Register'
-import Login from '@/pages/Login'
-import Detail from "@/pages/Detail"
-import AddCartSuccess from '@/pages/AddCartSuccess'
-import ShopCart from '@/pages/ShopCart'
-import Trade from '@/pages/Trade'
-import Pay from "@/pages/Pay"
-import PaySuccess from "@/pages/PaySuccess"
+//使用路由懒加载
 
 export default [{
   path: '/home',
-  component: Home,
+  component: ()=>import("@/pages/Home"),
   meta:{
     show:true
   }
 },
 {
   path: '/paysuccess',
-  component: PaySuccess,
+  component: ()=>import("@/pages/PaySuccess"),
   meta:{
     show:true
   }
 },
 {
-  path: '/pay',
-  component: Pay,
+  path: '/center',
+  component: ()=>import("@/pages/Center"),
   meta:{
     show:true
+  },
+  //二级路由
+  children:[
+    {
+      path:'myorder',
+      component:()=>import("@/pages/Center/myOrder")
+    },
+    {
+      path:"grouporder",
+      component:()=>import("@/pages/Center/groupOrder")
+    },
+    {
+      path:"/center",
+      redirect:"/center/myorder"
+
+    }
+  ]
+},
+{
+  path: '/pay',
+  component: ()=>import("@/pages/Pay"),
+  meta:{
+    show:true
+  },
+  beforeEnter: (to, from, next) => {
+    if(from.path=="/trade"){
+      next()
+    }else{
+      next(false)
+    }
   }
 },
 {
   path: '/shopcart',
-  component: ShopCart,
+  component: ()=>import("@/pages/ShopCart"),
   meta:{
     show:true
   }
 },
 {
   path: '/trade',
-  component: Trade,
+  component: ()=>import("@/pages/Trade"),
   meta:{
     show:true
+  },
+  beforeEnter: (to, from, next) => {
+    if(from.path=="/shopcart"){
+      next()
+    }else{
+      next(false)
+    }
   }
 },
 {
   name:"search",
   path: '/search/:keyword?',
-  component: Search,
+  component: ()=>import('@/pages/Search') ,
   meta:{
     show:true
   }
@@ -56,21 +83,21 @@ export default [{
 {
   name:'addcartsuccess',
   path: '/addcartsuccess',
-  component: AddCartSuccess,
+  component: ()=>import("@/pages/AddCartSuccess"),
   meta:{
     show:true
   }
 },
 {
   path: '/login',
-  component: Login,
+  component: ()=>import("@/pages/Login"),
   meta:{
     show:false
   }
 },
 {
   path: '/Register',
-  component: Register,
+  component: ()=>import("@/pages/Register"),
   meta:{
     show:false
   }
@@ -78,7 +105,7 @@ export default [{
 {
   //调到详情页时需要传id的参数
   path:"/detail/:skuId?",
-  component:Detail,
+  component:()=>import("@/pages/Detail"),
   meta:{
     show:true
   }

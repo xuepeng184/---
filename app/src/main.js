@@ -31,8 +31,13 @@ import '@/mock/mockServe'
 // Vue.use($)
 //同一引入api
 import * as API from "@/api"
-
-
+import VueLazyload from 'vue-lazyload'
+//引入表单验证
+import "@/plugins/validate"
+import myPicture from '@/assets/myPicture.jpg'
+Vue.use(VueLazyload,{
+  loading:myPicture
+})
 Vue.config.productionTip = false
 new Vue({
   render: h => h(App),

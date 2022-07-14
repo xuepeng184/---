@@ -89,7 +89,7 @@
     </div>
     <div class="trade">
       <div class="price">
-        应付金额:　<span>¥{{ orderInfo.totalAmount }}.00</span>
+        应付金额:<span>¥{{ orderInfo.totalAmount }}.00</span>
       </div>
       <div class="receiveInfo">
         寄送至:
@@ -107,7 +107,7 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  name: "Trade",
+  name: "Trade", 
   data() {
     return {
       message: "",
